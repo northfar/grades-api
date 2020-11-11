@@ -16,7 +16,7 @@ import {gradeRouter} from './routes/gradeRouter.js'
 })();
 
 const app = express();
-const origins = ['http://localhost:8080', 'https://desafio04-grades-app.herokuapp.com/']
+const origins = ['http://localhost:8080', 'http://desafio04-grades-app.herokuapp.com/']
 
 //define o dominio de origem para consumo do servico
 app.use(bodyParser.json());
