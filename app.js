@@ -16,13 +16,23 @@ import {gradeRouter} from './routes/gradeRouter.js'
 })();
 
 const app = express();
+const origins = ['http://localhost:8080', 'https://desafio04-grades-app.herokuapp.com/']
 
 //define o dominio de origem para consumo do servico
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:8080',
+    origin: (origin, callback) => {
+      if(!origin) 
+          return callback(null, true)
+      if(origins.indexOf(origin) === -1){
+        var msg = 'A política de CORS deste site não permite acesso a partir dessa origem'
+        return callback(new Error(msg), false)
+      }
+
+      return callback(null, true)
+    }
   })
 );
 
